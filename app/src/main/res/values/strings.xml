@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CanHubAndroidCropperJava</string>
+
+    <string name="result_image_desc">crop result</string>
+</resources>
