@@ -24,7 +24,8 @@ import com.canhub.cropper.CropImageView;
 public class MainActivity extends AppCompatActivity {
 
     ActivityResultLauncher<CropImageContractOptions> arl;
-    CropImageView iv1;
+    private CropImageView iv1;
+    private ImageView imageView2;
     Uri imageUri;
 
     @Override
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 */
         iv1 = findViewById(R.id.cropImageView);
+        imageView2 = findViewById(R.id.croppedImageView);
 
         Button btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -44,13 +46,23 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(("*** btn1 ***"));
 
                 imageUri = null;
+
+                // see for options: https://github.com/CanHub/Android-Image-Cropper/blob/main/cropper/src/main/kotlin/com/canhub/cropper/CropImageView.kt
                 CropImageOptions cropImageOptions = new CropImageOptions();
                 cropImageOptions.imageSourceIncludeGallery = true;
-                cropImageOptions.imageSourceIncludeCamera = true;
-                cropImageOptions.guidelines = CropImageView.Guidelines.ON;
+                cropImageOptions.imageSourceIncludeCamera = false;
+                cropImageOptions.cropperLabelText = "hello";
+                cropImageOptions.intentChooserTitle = "chooserTitle";
+                cropImageOptions.activityTitle = "Activity title";
+
+                cropImageOptions.fixAspectRatio = true;
+                cropImageOptions.aspectRatioX = 1;
+                cropImageOptions.aspectRatioY = 1;
+
+                //cropImageOptions.guidelines = CropImageView.Guidelines.ON;
+                cropImageOptions.guidelines = CropImageView.Guidelines.OFF;
                 CropImageContractOptions cropImageContractOptions = new CropImageContractOptions(imageUri, cropImageOptions);
                 arl.launch(cropImageContractOptions);
-
             }
         });
 
@@ -65,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 String uriFilePath = result.getUriFilePath(getApplicationContext(), false);
                 //Bitmap cropped = BitmapFactory.decodeFile(uri.getUriFilePath(getApplicationContext(), true));
                 iv1.setImageUriAsync(uriContent);
+
+                Bitmap cropped = BitmapFactory.decodeFile(result.getUriFilePath(getApplicationContext(), true));
+                imageView2.setImageBitmap(cropped);
+
+
+                //iv2.setImageURI(uriContent);
+                System.out.println("uriContent: " + uriContent);
+                System.out.println("uriFilePath: " + uriFilePath);
 
             } else {
                 System.out.println("*** error ***");
