@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityResultLauncher<CropImageContractOptions> arl;
     private CropImageView iv1;
-    private ImageView imageView2;
+    //private ImageView imageView2;
     Uri imageUri;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 */
         iv1 = findViewById(R.id.cropImageView);
-        imageView2 = findViewById(R.id.croppedImageView);
+        //imageView2 = findViewById(R.id.croppedImageView);
 
         Button btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 //Bitmap cropped = BitmapFactory.decodeFile(uri.getUriFilePath(getApplicationContext(), true));
                 iv1.setImageUriAsync(uriContent);
 
-                Bitmap cropped = BitmapFactory.decodeFile(result.getUriFilePath(getApplicationContext(), true));
-                imageView2.setImageBitmap(cropped);
+                //Bitmap cropped = BitmapFactory.decodeFile(result.getUriFilePath(getApplicationContext(), true));
+                //imageView2.setImageBitmap(cropped);
 
-
+/*
                 //iv2.setImageURI(uriContent);
                 System.out.println("uriContent: " + uriContent);
                 System.out.println("uriFilePath: " + uriFilePath);
-
+*/
             } else {
                 System.out.println("*** error ***");
             }
